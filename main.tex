@@ -1,8 +1,8 @@
 \documentclass[aspectratio=169]{beamer}
 
 % Tema e Cores
-\usetheme{Frankfurt}   % Temas: Boadilla, CambridgeUS, metropolis, Madrid, Frankfurt
-\usecolortheme{default} % seahorse, spruce
+\usetheme{Madrid}   % Temas: Boadilla, CambridgeUS, metropolis, Madrid, Frankfurt
+\usecolortheme{spruce} % seahorse, spruce
 
 % Pacotes de Idioma e Codificação
 \usepackage[utf8]{inputenc}
@@ -13,6 +13,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{tikz}
+\usepackage{qrcode}
 
 % --- COMANDO PARA INSERIR A LOGO ANTES DO TÍTULO ---
 \addtobeamertemplate{title page}{
@@ -30,13 +32,23 @@
   \inst{2} Professor Dr., Faculdade de Computação - UFPA
 }
 
+
+
+
 \begin{document}
 
+
+%==============================================================================%
 % --- SLIDE 1: Capa ---
 \begin{frame}
     \titlepage
 \end{frame}
+%==============================================================================%
 
+
+
+
+%==============================================================================%
 % --- SLIDE 2: Introdução ---
 \begin{frame}{Introdução e Objetivos}
     \textbf{Contexto}
@@ -52,7 +64,13 @@
         \item Comparar oito classificadores e identificar o mais adequado utilizando a metodologia \textbf{CRISP-DM}.
     \end{itemize}
 \end{frame}
+%==============================================================================%
 
+
+
+
+
+%==============================================================================%
 % --- SLIDE 3: Base de Dados e Preparação ---
 \begin{frame}{Metodologia: Dados e Preparação}
     \textbf{Entendimento dos Dados}
@@ -71,6 +89,9 @@
         \item Aplicação de padronização escalar rigorosa (Z-score).
     \end{itemize}
 \end{frame}
+%==============================================================================%
+
+
 
 % --- SLIDE 4: Ferramentas ---
 \begin{frame}{Metodologia: Ferramentas Utilizadas}
@@ -272,12 +293,18 @@ A fim de compreender as características intrínsecas da base, estatísticas des
     \end{itemize}
 \end{frame}
 
-% --- SLIDE 12: Encerramento ---
+% --- SLIDE 13: Encerramento ---
 \begin{frame}
     \centering
     \Huge \textbf{Obrigado!}
+    
+    \vspace{0.5cm}
+    
+    \qrcode[height=3.5cm]{https://github.com/MarioDhiego/Slide_ERIN_2026/blob/main/Artigo_Slide_ERIN_2026.pdf}
+    
     \vspace{1cm}
     
+    % --- Contatos um embaixo do outro ---
     \normalsize
     \textbf{Contatos:}\\
     diego.vatente@gmail.com\\
@@ -285,4 +312,6 @@ A fim de compreender as características intrínsecas da base, estatísticas des
     jmorais@ufpa.br
 \end{frame}
 
+
 \end{document}
+
