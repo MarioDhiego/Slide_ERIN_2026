@@ -15,7 +15,7 @@
 \usepackage{multirow}
 \usepackage{tikz}
 \usepackage{qrcode}
-\usepackage{amsmath}
+
 
 % --- COMANDO PARA INSERIR A LOGO ANTES DO TÍTULO ---
 \addtobeamertemplate{title page}{
@@ -62,11 +62,12 @@
 %==============================================================================%
 
 %==============================================================================%
+%==============================================================================%
 % --- SLIDE 3: Base de Dados e Preparação ---
 \begin{frame}{Metodologia: Dados e Preparação}
     \textbf{Entendimento dos Dados}
     \begin{itemize}
-        \item \textbf{Dataset:} \texttt{loan\_data.csv} (Kaggle).
+        \item \textbf{Dataset:} \texttt{loan\_data.csv} (Kaggle / Disponível em: \href{https://github.com/MarioDhiego/Slide_ERIN_2026/blob/main/loan_data.csv}{\color{blue}\underline{GitHub do Projeto}}).
         \item \textbf{Tamanho:} 381 registros e 13 variáveis.
         \item \textbf{Variável-alvo:} \texttt{Loan\_Status} (0 = Reprovado; 1 = Aprovado).
     \end{itemize}
@@ -81,11 +82,12 @@
     \end{itemize}
 \end{frame}
 %==============================================================================%
+%==============================================================================%
 
 %==============================================================================%
 % --- SLIDE 4: Ferramentas ---
 \begin{frame}{Metodologia: Ferramentas Utilizadas}
-Para conduzir as análises e estimativas neste estudo, foi adotada a linguagem de programação \textbf{Python}, utilizando a \textbf{IDE Google Colaboratory} na versão 3.10.12. Foram empregadas as seguintes bibliotecas para implementação das diversas etapas do processo:  
+Para conduzir as análises e estimativas neste estudo, foi adotada a linguagem de programação \textbf{Python}, utilizando a IDE \href{https://colab.research.google.com/drive/1bM0SFVu0IQhGwztcZHo2HhptDlSos2jZ#scrollTo=lNeeCTE95Ab9}{\color{blue}\textbf{\underline{Google Colaboratory}}} na versão 3.10.12. Foram empregadas as seguintes bibliotecas para implementação das diversas etapas do processo:  
     \vspace{0.3cm}
     \begin{itemize}
         \item NumPy [OLIPHANT, T. E. et al. (2006)]
@@ -254,15 +256,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 %==============================================================================%
 % --- SLIDE 11: Curva ROC ---
 \begin{frame}{Resultados: Análise da Curva ROC}
-    \begin{columns}
-        \column{0.40\textwidth}
-        \begin{itemize}
-            \item A Curva ROC atesta visualmente a robustez dos classificadores.
-            \item \textbf{Random Forest} apresentou a curva mais deslocada para o canto superior esquerdo (AUC 82,6\%).
-            \item Fica evidente a superioridade sobre a \textit{baseline} (Regressão Logística).
-        \end{itemize}
-        
-        \column{0.60\textwidth}
+    \begin{columns} 
+        \column{0.62\textwidth}
         \begin{figure}
             \centering
             \includegraphics[width=0.95\textwidth]{curva_roc_geral.png}
