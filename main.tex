@@ -15,6 +15,7 @@
 \usepackage{multirow}
 \usepackage{tikz}
 \usepackage{qrcode}
+\usepackage{amsmath}
 
 % --- COMANDO PARA INSERIR A LOGO ANTES DO TÍTULO ---
 \addtobeamertemplate{title page}{
@@ -33,10 +34,7 @@
 }
 
 
-
-
 \begin{document}
-
 
 %==============================================================================%
 % --- SLIDE 1: Capa ---
@@ -44,9 +42,6 @@
     \titlepage
 \end{frame}
 %==============================================================================%
-
-
-
 
 %==============================================================================%
 % --- SLIDE 2: Introdução ---
@@ -65,10 +60,6 @@
     \end{itemize}
 \end{frame}
 %==============================================================================%
-
-
-
-
 
 %==============================================================================%
 % --- SLIDE 3: Base de Dados e Preparação ---
@@ -91,8 +82,6 @@
 \end{frame}
 %==============================================================================%
 
-
-
 %==============================================================================%
 % --- SLIDE 4: Ferramentas ---
 \begin{frame}{Metodologia: Ferramentas Utilizadas}
@@ -108,9 +97,6 @@ Para conduzir as análises e estimativas neste estudo, foi adotada a linguagem d
 \end{frame}
 %==============================================================================%
 
-
-
-
 %==============================================================================%
 % --- SLIDE 5: Modelagem ---
 \begin{frame}{Metodologia: Modelagem e Avaliação}
@@ -122,23 +108,74 @@ Para conduzir as análises e estimativas neste estudo, foi adotada a linguagem d
         \item Naive Bayes Gaussiano (NBG)
         \item Support Vector Machine (SVM)
         \item Multilayer Perceptron (MLP)
-        \item Voting Classifier (\textit{soft voting})
+      %  \item Voting Classifier (\textit{soft voting})
     \end{itemize}
     \vspace{0.3cm}
     
     \textbf{Otimização e Validação}
     \begin{itemize}
         \item \textit{Grid Search} associado à \textbf{Validação Cruzada 10-fold}.
-        \item Métricas: Acurácia, F1-Score, AUC, Gini e KS.
+        \item Métricas: Acurácia, Precisão, Revocação, F1-Score, AUC, Gini e KS.
     \end{itemize}
 \end{frame}
 %==============================================================================%
 
-
-
+%==============================================================================%
+% --- SLIDE 6: Métricas Parte 1 ---
+\begin{frame}{Métricas de Avaliação I}
+    O desempenho dos modelos foi inicialmente mensurado com base nos Verdadeiros Positivos (VP), Verdadeiros Negativos (VN), Falsos Positivos (FP) e Falsos Negativos (FN).
+    
+    \vspace{0.2cm}
+    \begin{itemize}
+        \item \textbf{Acurácia (Acc):} Taxa global de acertos do modelo.
+        $ Acc = \frac{VP + VN}{VP + VN + FP + FN} $
+        
+        \vspace{0.1cm}
+        \item \textbf{Precisão (Precision):} Foco na exatidão das predições positivas.
+        $ Prec = \frac{VP}{VP + FP} $
+        
+        \vspace{0.1cm}
+        \item \textbf{Revocação (Recall/Sensibilidade):} Capacidade de detectar os positivos reais.
+        $ Rec = \frac{VP}{VP + FN} $
+        
+        \vspace{0.1cm}
+        \item \textbf{F1-Score:} Média harmônica entre Precisão e Revocação (robusta ao desbalanceamento).
+        $ F1 = 2 \cdot \frac{Prec \cdot Rec}{Prec + Rec} $
+    \end{itemize}
+    
+    \vfill
+    \hrule
+    \vspace{0.1cm}
+    {\tiny \textbf{Fundamentação:} THARWAT, A. Classification assessment methods. \textit{Applied Computing and Informatics}, v. 17, n. 1, p. 168-192, 2021.}
+\end{frame}
+%==============================================================================%
 
 %==============================================================================%
-% --- SLIDE 6: Resultados - Exploratória Numérica ---
+% --- SLIDE 7: Métricas Parte 2 ---
+\begin{frame}{Métricas de Avaliação II}
+    Para avaliar a capacidade do modelo em \textbf{separar e ordenar} os perfis de risco (bom vs. mau pagador), empregaram-se métricas baseadas em limiares e probabilidade:
+    
+    \vspace{0.2cm}
+    \begin{itemize}
+        \item \textbf{AUC-ROC (Area Under the Curve):} Mede a distinção entre as classes em vários limiares (Integra a Taxa de VP pela Taxa de FP).
+        $$ AUC = \int_{0}^{1} TPR(t) \, d(FPR(t)) $$
+        
+        \item \textbf{Índice de Gini:} Derivado da AUC, quantifica o poder discriminatório geral.
+        $$ Gini = 2 \cdot AUC - 1 $$
+        
+        \item \textbf{Estatística KS (Kolmogorov-Smirnov):} Mede a distância máxima entre as funções de distribuição acumulada dos aprovados ($F_{pos}$) e reprovados ($F_{neg}$).
+        $$ KS = \max_{c} |F_{pos}(c) - F_{neg}(c)| $$
+    \end{itemize}
+    
+    \vfill
+    \hrule
+    \vspace{0.1cm}
+    {\tiny \textbf{Fundamentação:} GRANDINI, M.; BAGLI, E.; VISANI, G. Metrics for Multi-Class Classification: an Overview. \textit{arXiv:2008.05756}, 2020.}
+\end{frame}
+%==============================================================================%
+
+%==============================================================================%
+% --- SLIDE 8: Resultados - Exploratória Numérica ---
 \begin{frame}{Resultados: Análise Exploratória de Dados (1/2)}
 A fim de compreender as características intrínsecas da base, estatísticas descritivas foram extraídas. A Tabela \ref{tab:1} apresenta um resumo dos atributos numéricos (em sua escala original para facilitar a interpretação).
 
@@ -162,11 +199,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 \end{frame}
 %==============================================================================%
 
-
-
-
 %==============================================================================%
-% --- SLIDE 7: Resultados - Exploratória Categórica ---
+% --- SLIDE 9: Resultados - Exploratória Categórica ---
 \begin{frame}{Resultados: Análise Exploratória de Dados (2/2)}
 \begin{table}[htbp]
     \centering
@@ -177,12 +211,12 @@ A fim de compreender as características intrínsecas da base, estatísticas des
           \hline \hline
         Gênero                & Masculino     & 296                 & 77,69 \\
         Estado Civil          & Casado        & 228                 & 59,84 \\
-        Nº de Dependentes     & 0             & 242                 & 63,52 \\
+        Nº de Dependentes     & 1             & 242                 & 63,52 \\
         Escolaridade          & Graduação     & 278                 & 72,97 \\
-        Trablhador Autônomo   & Não           & 346                 & 90,81 \\
+        Trabalhador Autônomo  & Não           & 346                 & 90,81 \\
         Histórico de Crédito  & Sim           & 324                 & 85,04 \\
-        Area de Residência    & Semiurbana    & 149                 & 39,11 \\
-        Estatus de Empréstimo & Aprovado      & 271                 & 71,13 \\ 
+        Área de Residência    & Semiurbana    & 149                 & 39,11 \\
+        Status de Empréstimo  & Aprovado      & 271                 & 71,13 \\ 
           \hline \hline
     \end{tabular} 
     \label{tab:2}
@@ -190,10 +224,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 \end{frame}
 %==============================================================================%
 
-
-
 %==============================================================================%
-% --- SLIDE 8: Resultados - Tabela de Desempenho ---
+% --- SLIDE 10: Resultados - Tabela de Desempenho ---
 \begin{frame}{Resultados: Desempenho Geral dos Modelos}
     \begin{table}[]
         \centering
@@ -205,7 +237,6 @@ A fim de compreender as características intrínsecas da base, estatísticas des
             \textbf{Modelo} & \textbf{Acurácia (\%)} & \textbf{F1-Score (\%)} & \textbf{AUC (\%)} & \textbf{Gini (\%)} & \textbf{KS (\%)} \\ 
               \hline \hline
             \textbf{Random Forest} & \textbf{85,7} & \textbf{90,8} & \textbf{82,6} & \textbf{65,3} & 54,5 \\
-            Voting & 83,1 & 89,1 & 80,6 & 61,2 & \textbf{56,4} \\
             Regressão Logística & \textbf{85,7} & \textbf{90,8} & 72,7 & 45,5 & 54,5 \\
             Naive Bayes & \textbf{85,7} & \textbf{90,8} & 70,1 & 40,2 & 52,7 \\
             Árvore de Decisão & 75,3 & 82,9 & 69,1 & 38,2 & 43,6 \\
@@ -220,10 +251,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 \end{frame}
 %==============================================================================%
 
-
-
 %==============================================================================%
-% --- SLIDE 9: Curva ROC ---
+% --- SLIDE 11: Curva ROC ---
 \begin{frame}{Resultados: Análise da Curva ROC}
     \begin{columns}
         \column{0.40\textwidth}
@@ -242,15 +271,12 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 \end{frame}
 %==============================================================================%
 
-
-
-
 %==============================================================================%
-% --- SLIDE 10: Teste de DeLong ---
+% --- SLIDE 12: Teste de DeLong ---
 \begin{frame}{Resultados: Teste Estatístico de DeLong}
     \begin{itemize}
         \item O \textbf{Teste de DeLong} foi aplicado para verificar a \textbf{significância estatística} das diferenças empíricas entre as áreas sob a curva (AUC).
-        \item \textbf{Random Forest (Baseline):} Possui diferença significativa em relação à maioria dos modelos, \textbf{exceto} para Regressão Logística e Voting Classifier.
+        \item \textbf{Random Forest (Baseline):} Possui diferença significativa em relação à maioria dos modelos, \textbf{exceto} para Regressão Logística.
     \end{itemize}
     \vspace{0.2cm}
     
@@ -262,7 +288,7 @@ A fim de compreender as características intrínsecas da base, estatísticas des
         \begin{tabular}{l|c|c}
             \hline \hline
             \textbf{Modelo Avaliado} & \textbf{Valor-p} & \textbf{Dif. Significativa ($\alpha = 0{,}05$)} \\  \hline \hline
-            Voting & $0{,}112310$ & Não \\
+         %   Voting & $0{,}112310$ & Não \\
             Regressão Logística & $0{,}100014$ & Não \\
             Naive Bayes & $< 0{,}006914$ & Sim \\
             Árvore de Decisão & $< 0{,}018508$ & Sim \\
@@ -274,13 +300,10 @@ A fim de compreender as características intrínsecas da base, estatísticas des
         }
     \end{table}
 \end{frame}
-%==============================================================================%\textbf{}
-
-
-
+%==============================================================================%
 
 %==============================================================================%
-% --- SLIDE 11: Análise do Modelo Definitivo ---
+% --- SLIDE 13: Análise do Modelo Definitivo ---
 \begin{frame}{Resultados: O Modelo Definitivo (Random Forest)}
     \begin{columns}
         \column{0.48\textwidth}
@@ -303,14 +326,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 \end{frame}
 %==============================================================================%
 
-
-
-
-
-
-
 %==============================================================================%
-% --- SLIDE 11: Considerações Finais ---
+% --- SLIDE 14: Considerações Finais ---
 \begin{frame}{Considerações Finais e Trabalhos Futuros}
     \textbf{Conclusões}
     \begin{itemize}
@@ -328,9 +345,84 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 %==============================================================================%
 
 
+%==============================================================================%
+% --- SLIDES DE REFERÊNCIAS BIBLIOGRÁFICAS ---
+\begin{frame}[allowframebreaks]{Referências Bibliográficas}
+    \scriptsize % Reduz o tamanho da fonte para caber mais referências
+    \begin{thebibliography}{99}
+
+    \bibitem{maciel2015}
+    MACIEL, H. M.; MACIEL, W. M. 
+    \newblock Análise da inadimplência em uma instituição financeira na região metropolitana de Fortaleza.
+    \newblock \emph{Essentia - Revista de Cultura, Ciência e Tecnologia da UVA}, v. 16, n. 2, 2015.
+
+    \bibitem{morettin2022}
+    MORETTIN, P. A.; SINGER, J. M.
+    \newblock \emph{Estatística e ciência de dados}.
+    \newblock Rio de Janeiro: LTC, 2022. 454 p.
+
+    \bibitem{morais2024}
+    MORAIS, J. M.
+    \newblock CRISP-DM: A metodologia certa para projetos de machine learning.
+    \newblock Material didático da disciplina Tópicos Especiais em AM, Faculdade de Computação, UFPA, 2024.
+
+    \bibitem{monard2003}
+    MONARD, M. C.; BARANAUSKAS, J. A.
+    \newblock Conceitos sobre aprendizado de máquina.
+    \newblock \emph{Sistemas Inteligentes - Fundamentos e aplicações}, 2003.
+
+    \bibitem{izbicki2020}
+    IZBICKI, R.; SANTOS, T. M. dos.
+    \newblock \emph{Aprendizado de máquina: uma abordagem estatística}.
+    \newblock 1. ed. 2020.
+
+    \bibitem{chapman2000}
+    CHAPMAN, P. et al.
+    \newblock CRISP-DM 1.0: Step-by-step data mining guide.
+    \newblock \emph{SPSS Inc.}, 2000.
+
+    \bibitem{numpy2020}
+    HARRIS, C. R. et al.
+    \newblock Array programming with NumPy.
+    \newblock \emph{Nature}, v. 585, n. 7825, p. 357–362, 2020.
+
+    \bibitem{pandas2020}
+    THE PANDAS DEVELOPMENT TEAM.
+    \newblock pandas-dev/pandas: Pandas, 2020.
+
+    \bibitem{mckinney2010}
+    MCKINNEY, W.
+    \newblock Data Structures for Statistical Computing in Python.
+    \newblock In: \emph{Proceedings of the 9th Python in Science Conference}, p. 56–61, 2010.
+
+    \bibitem{matplotlib2007}
+    HUNTER, J. D.
+    \newblock Matplotlib: A 2D graphics environment.
+    \newblock \emph{Computing in Science \& Engineering}, v. 9, n. 3, p. 90–95, 2007.
+
+    \bibitem{seaborn2021}
+    WASKOM, M. L.
+    \newblock seaborn: statistical data visualization.
+    \newblock \emph{Journal of Open Source Software}, v. 6, n. 60, p. 3021, 2021.
+
+    \bibitem{scikit2011}
+    PEDREGOSA, F. et al.
+    \newblock Scikit-learn: Machine learning in Python.
+    \newblock \emph{Journal of Machine Learning Research}, v. 12, p. 2825–2830, 2011.
+
+    \bibitem{scikit2013}
+    BUITINCK, L. et al.
+    \newblock API design for machine learning software: experiences from the scikit-learn project.
+    \newblock In: \emph{ECML PKDD Workshop}, p. 108–122, 2013.
+
+    \end{thebibliography}
+\end{frame}
+%==============================================================================%
+
+
 
 %==============================================================================%
-% --- SLIDE 13: Encerramento ---
+% --- SLIDE 15: Encerramento ---
 \begin{frame}
     \centering
     \Huge \textbf{Obrigado!}
@@ -344,7 +436,7 @@ A fim de compreender as características intrínsecas da base, estatísticas des
     % --- Contatos um embaixo do outro ---
     \normalsize
     \textbf{Contatos:}\\
-    diego.vatente@gmail.com\\
+    diego.valente@gmail.com\\
     gabrielkadran@hotmail.com\\
     jmorais@ufpa.br
 \end{frame}
@@ -352,5 +444,8 @@ A fim de compreender as características intrínsecas da base, estatísticas des
 
 
 
-\end{document}
 
+
+
+
+\end{document}
