@@ -1,8 +1,8 @@
 \documentclass[aspectratio=169]{beamer}
 
 % Tema e Cores
-\usetheme{Madrid}   % Temas: Boadilla, CambridgeUS, metropolis, Madrid, Frankfurt
-\usecolortheme{spruce} % seahorse, spruce
+\usetheme{Boadilla}   % Temas: Boadilla, CambridgeUS, metropolis, Madrid, Frankfurt
+%\usecolortheme{spruce} % seahorse, spruce
 
 % Pacotes de Idioma e Codificação
 \usepackage[utf8]{inputenc}
@@ -15,6 +15,7 @@
 \usepackage{multirow}
 \usepackage{tikz}
 \usepackage{qrcode}
+\usepackage{orcidlink}
 
 
 % --- COMANDO PARA INSERIR A LOGO ANTES DO TÍTULO ---
@@ -26,11 +27,11 @@
 % Informações da Capa
 \title[Modelos Preditivos para Empréstimos]{Modelos Preditivos para Estimação de Status de Empréstimos Bancários via Machine Learning: Uma Abordagem Baseada na Metodologia CRISP-DM}
 
-\author[Valente, Silva \& Morais]{Mário Diego Valente\inst{1} \and Gabriel Baia da Silva\inst{1} \and Jefferson Magalhães de Morais\inst{2}}
+\author[Valente, Silva \& Morais]{Mário Diego R. Valente\inst{1} \orcidlink{0000-0001-7262-3336} \and Gabriel Baia da Silva\inst{1} \orcidlink{0009-0008-0487-1061} \and Jefferson Magalhães de Morais\inst{2} \orcidlink{0000-0002-8566-3238}}
 
 \institute[UFPA]{
   \inst{1} Graduando em Sistemas de Informação - UFPA\\
-  \inst{2} Professor Dr., Faculdade de Computação - UFPA
+  \inst{2} Professor Dr., Faculdade de Computação - UFPA 
 }
 
 
@@ -56,7 +57,7 @@
     \textbf{Objetivo do Trabalho}
     \begin{itemize}
         \item Aplicar modelos preditivos de \textit{Machine Learning} para classificação do status de aprovação de empréstimos.
-        \item Comparar oito classificadores e identificar o mais adequado utilizando a metodologia \textbf{CRISP-DM}.
+        \item Comparar sete classificadores e identificar o mais adequado utilizando a metodologia \textbf{CRISP-DM}.
     \end{itemize}
 \end{frame}
 %==============================================================================%
@@ -102,13 +103,14 @@ Para conduzir as análises e estimativas neste estudo, foi adotada a linguagem d
 %==============================================================================%
 % --- SLIDE 5: Modelagem ---
 \begin{frame}{Metodologia: Modelagem e Avaliação}
-    \textbf{Modelos Avaliados (8 classificadores)}
+    \textbf{Modelos Avaliados (7 classificadores)}
     \begin{itemize}
-        \item Regressão Logística (\textit{baseline})
-        \item Árvore de Decisão e Random Forest
-        \item k-Nearest Neighbors (kNN)
-        \item Naive Bayes Gaussiano (NBG)
-        \item Support Vector Machine (SVM)
+        \item Regressão Logística (\textit{baseline});
+        \item Árvore de Decisão (DT);
+        \item Foresta Aleatória (RF);
+        \item k-Nearest Neighbors (kNN);
+        \item Naive Bayes Gaussiano (NBG);
+        \item Support Vector Machine (SVM);
         \item Multilayer Perceptron (MLP)
       %  \item Voting Classifier (\textit{soft voting})
     \end{itemize}
@@ -260,7 +262,7 @@ A fim de compreender as características intrínsecas da base, estatísticas des
         \column{0.62\textwidth}
         \begin{figure}
             \centering
-            \includegraphics[width=0.95\textwidth]{curva_roc1.png}
+            \includegraphics[width=0.96\textwidth]{curva_roc1.png}
         \end{figure}
     \end{columns}
 \end{frame}
@@ -422,7 +424,7 @@ A fim de compreender as características intrínsecas da base, estatísticas des
     \centering
     \Huge \textbf{Obrigado!}
     
-    \vspace{0.5cm}
+    \vspace{0.59cm}
     
     \qrcode[height=3.5cm]{https://github.com/MarioDhiego/Slide_ERIN_2026/blob/main/Artigo_Slide_ERIN_2026.pdf}
     
@@ -430,7 +432,7 @@ A fim de compreender as características intrínsecas da base, estatísticas des
     
     % --- Contatos um embaixo do outro ---
     \normalsize
-    \textbf{Contatos:}\\
+   % \textbf{Contatos:}\\
     diego.valente@gmail.com\\
     gabrielkadran@hotmail.com\\
     jmorais@ufpa.br
